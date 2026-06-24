@@ -1,9 +1,9 @@
 #!/bin/sh
 
-DEVICE=$(fastboot getvar product 2>&1 | awk '/product:/ {print $2}')
+DEVICE=$(termux-fastboot getvar product 2>&1 | awk '/product:/ {print $2}')
 
 if [ -z "$DEVICE" ]; then
-    echo "错误: 未能获取到设备代号。请检查 Fastboot 连接。"
+    echo "错误: 未能获取到设备代号。请检查 termux-fastboot 连接。"
     exit 1
 fi
 
@@ -15,10 +15,10 @@ curl -s "https://mi.ltya.top/product.csv" | awk -F', ' -v code="$DEVICE" '
 '
 
 echo -e "\n获取解锁状态"
-fastboot getvar unlocked
+termux-fastboot getvar unlocked
 
 echo -e "\n查询设备信息"
-fastboot oem device-info
+termux-fastboot oem device-info
 
 echo -e "\nMade by Lantianya(FlyYoung) 酷安@我是岚天呀\n"
 

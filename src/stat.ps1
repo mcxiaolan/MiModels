@@ -6,7 +6,7 @@ if ((fastboot getvar product 2>&1 | Out-String) -match 'product:\s*(\S+)') {
     exit 1
 }
 
-if ((Invoke-RestMethod "https://mimodels.ltya.top/product.csv") -match "(?m)^$DEVICE\s*,\s*(.*)") {
+if ((Invoke-RestMethod "https://mi.ltya.top/product.csv") -match "(?m)^$DEVICE\s*,\s*(.*)") {
     Write-Host "设备型号: $($Matches[1].Trim())"
 } else {
     Write-Host "设备型号: 未在列表中找到该代号"
