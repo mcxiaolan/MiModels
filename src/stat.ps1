@@ -1,4 +1,3 @@
-# 获取设备代号
 if ((fastboot getvar product 2>&1 | Out-String) -match 'product:\s*(\S+)') {
     $DEVICE = $Matches[1]
     Write-Host "设备代号: $DEVICE"
@@ -7,7 +6,6 @@ if ((fastboot getvar product 2>&1 | Out-String) -match 'product:\s*(\S+)') {
     exit 1
 }
 
-# 查询在线设备型号（使用多行正则匹配减少变量和循环）
 if ((Invoke-RestMethod "https://mimodels.ltya.top/product.csv") -match "(?m)^$DEVICE\s*,\s*(.*)") {
     Write-Host "设备型号: $($Matches[1].Trim())"
 } else {
@@ -22,6 +20,5 @@ fastboot oem device-info
 
 Write-Host "`nMade by Lantianya(FlyYoung) 酷安@我是岚天呀`n"
 
-# 实现“按任意键继续”
 Write-Host -NoNewline "请按任意键继续..."
 $null = [Console]::ReadKey($true)
